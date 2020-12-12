@@ -1,12 +1,10 @@
 package me.hannew.demostudyrestapi.events;
 
 import lombok.*;
+import me.hannew.demostudyrestapi.accounts.Account;
 import org.springframework.data.annotation.Id;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Builder @AllArgsConstructor @NoArgsConstructor
@@ -30,6 +28,8 @@ public class Event {
     private boolean free;
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus = EventStatus.DRAFT;
+    @ManyToOne
+    private Account manager;
 
     public void update(){
         if(this.basePrice == 0 && this.maxPrice == 0){
